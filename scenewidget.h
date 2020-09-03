@@ -10,7 +10,7 @@ class SceneWidget : public QVTKOpenGLNativeWidget
 {
   Q_OBJECT
 public:
-  explicit SceneWidget(QWidget *parent = 0);
+  explicit SceneWidget(QWidget *parent = nullptr);
 
   //! Add a data set to the scene
   /*!
