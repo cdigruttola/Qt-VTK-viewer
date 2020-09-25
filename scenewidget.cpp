@@ -6,7 +6,8 @@
 #include <vtkProperty.h>
 #include <vtkRenderWindowInteractor.h>
 
-SceneWidget::SceneWidget(QWidget* parent) : QVTKOpenGLNativeWidget(parent)
+SceneWidget::SceneWidget(QWidget* parent)
+    : QVTKOpenGLNativeWidget(parent)
 {
     vtkNew<vtkGenericOpenGLRenderWindow> window;
     setRenderWindow(window.Get());
@@ -37,28 +38,26 @@ void SceneWidget::addDataSet(vtkSmartPointer<vtkDataSet> dataSet)
     m_renderer->AddActor(actor);
     m_renderer->ResetCamera(dataSet->GetBounds());
 
-    paintGL();
+    renderWindow()->Render();
 }
 
 void SceneWidget::removeDataSet()
 {
     vtkActor* actor = m_renderer->GetActors()->GetLastActor();
-    if (actor != nullptr)
-    {
+    if (actor != nullptr) {
         m_renderer->RemoveActor(actor);
     }
 
-    paintGL();
+    renderWindow()->Render();
 }
 
 void SceneWidget::zoomToExtent()
 {
     // Zoom to extent of last added actor
     vtkSmartPointer<vtkActor> actor = m_renderer->GetActors()->GetLastActor();
-    if (actor != nullptr)
-    {
+    if (actor != nullptr) {
         m_renderer->ResetCamera(actor->GetBounds());
     }
 
-    paintGL();
+    renderWindow()->Render();
 }

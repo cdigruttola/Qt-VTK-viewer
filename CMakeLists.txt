@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.11)
+cmake_minimum_required(VERSION 3.8)
 
 project(QtVtkViewer)
 
@@ -7,9 +7,9 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # List source files & resources
 file (GLOB Sources *.cpp)
-file (GLOB_RECURSE Headers *.h)
-file (GLOB_RECURSE Resources *.qrc)
-file (GLOB_RECURSE UIs *.ui)
+file (GLOB Headers *.h)
+file (GLOB Resources *.qrc)
+file (GLOB UIs *.ui)
 
 # Find package Qt
 find_package(Qt5Core REQUIRED)
@@ -24,10 +24,6 @@ set(CMAKE_AUTORCC ON)
 
 # Find package VTK
 find_package(VTK REQUIRED)
-
-# Use VTK
-#include(${VTK_USE_FILE})
-include_directories(${VTK_INCLUDE_DIRS})
 
 # Build executable
 add_executable(QtVtkViewer WIN32 ${Sources} ${Headers} ${Resources} ${UIs})
